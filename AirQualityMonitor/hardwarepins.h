@@ -29,7 +29,7 @@
 #define DUST_SENSOR_DIGITAL_PIN_PM25  7        // DSM501 Pin 4 (red)
 
 //LCD Pins
-const int rs = 12, en = 11, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
+const int lcd_pin_rs = 12, lcd_pin_en = 11, lcd_pin_d4 = 5, lcd_pin_d5 = 4, lcd_pin_d6 = 3, lcd_pin_d7 = 2;
 
 const int AQI_REFRESH = 300000L;
 

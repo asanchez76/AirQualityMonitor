@@ -11,7 +11,7 @@
 
 // initialize the library by associating any needed LCD interface pin
 // with the arduino pin number it is connected to
-LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
+LiquidCrystal lcd(lcd_pin_rs, lcd_pin_en, lcd_pin_d4, lcd_pin_d5, lcd_pin_d6, lcd_pin_d7);
 
 void LCDPrint(const char line1[], const char line2[], bool clean)
 {
