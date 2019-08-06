@@ -36,5 +36,7 @@ const int AQI_REFRESH = 300000L;
 const int pResistor = A0; // Photoresistor at Arduino analog pin A0
 const int ledPin = 13;       // Led pin at Arduino pin 9
 
+#define IRQ_BUTTONS_PIN	18 //pin 18 only works in mega2560 or better, change to 2 or 3 to 328 processors family
+
 
 #endif /* HARDWAREPINS_H_ */

@@ -7,6 +7,7 @@
 #include "aqi.h"
 #include "dhtmanager.h"
 #include "display.h"
+#include "buttons.h"
 
 #include <Timer.h>
 #include <Event.h>
@@ -17,9 +18,14 @@ Timer timer;
 void setup() {
   Serial.begin(115200);
   int photoSensorEvent = timer.every(500, readPhotoSensor);
+  initButtons();
+  int buttonTimerEvent = timer.every(500, readButtonsState);
+
   LCDInit();
   LCDPrint("Initializing...");
   delay(3000);
+
+
   //Agustins: TODO disconnected until sensor restablished
   //SetupESP();
 

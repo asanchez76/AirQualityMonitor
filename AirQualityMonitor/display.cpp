@@ -73,8 +73,9 @@ void readPhotoSensor()
 	int output = resistorvalue / 5;
 	analogWrite(ledPin,output);
 
+	/*
 	char buf[100];
 	sprintf(buf, "[DISP] readPhotoSensor triggered with value: %d, dim to:%d\r\n", resistorvalue, output);
 	Serial.write(buf);
-
+	*/
 }
