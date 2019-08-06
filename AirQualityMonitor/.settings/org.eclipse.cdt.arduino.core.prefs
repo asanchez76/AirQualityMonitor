@@ -1,0 +1,2 @@
+eclipse.preferences.version=1
+libraries=["Timer library","WiFiEsp","DHT sensor library","Adafruit Unified Sensor","ThingSpeak","LiquidCrystal"]
