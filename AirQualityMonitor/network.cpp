@@ -84,12 +84,15 @@ void setIoTField(int id, String value)
 
 void writeIoTFields()
 {
-  // write to the ThingSpeak channel
-  int x = ThingSpeak.writeFields(myChannelNumber, myWriteAPIKey);
-  if(x == 200){
-    Serial.println("[NET]Channel update successful.");
-  }
-  else{
-    Serial.println("[NET]Problem updating channel. HTTP error code " + String(x));
-  }
+	//put a hold message on this display since button actions are not going to be available (except through interrupts
+	LCDPrint("Uploading data.", "Please wait...");
+	// write to the ThingSpeak channel
+	int x = ThingSpeak.writeFields(myChannelNumber, myWriteAPIKey);
+	if(x == 200){
+	Serial.println("[NET]Channel update successful.");
+	}
+		else{
+			Serial.println("[NET]Problem updating channel. HTTP error code " + String(x));
+	}
+	LCDClear();
 }

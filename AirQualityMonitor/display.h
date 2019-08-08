@@ -16,5 +16,6 @@ void LCDPrint(const char[], const char[], bool);
 void LCDPrint(const char[]);
 void LCDInit();
 void readPhotoSensor();
+void LCDClear();
 
 #endif /* DISPLAY_H_ */

@@ -8,7 +8,7 @@
 #ifndef BUTTONS_H_
 #define BUTTONS_H_
 
-void initButtons();
+void initButtons(void (*btn1_ptr)(void), void (*btn2_ptr)(void), void (*btn3_ptr)(void));
 void IRQbuttonPressed();
 void readButtonsState();
 

@@ -47,12 +47,17 @@ void LCDPrint(const char line1[])
 	LCDPrint(line1,"");
 }
 
+void LCDClear()
+{
+	lcd.clear();
+}
+
 void LCDInit()
 {
 	// set up the LCD's number of columns and rows:
 	lcd.begin(16, 2);
 
-	pinMode(ledPin, OUTPUT);  // Set lepPin - 9 pin as an output
+	pinMode(lcdBacklightPin, OUTPUT);  // Set lepPin - 9 pin as an output
 	pinMode(pResistor, INPUT);// Set pResistor - A0 pin as an input (optional)
 	readPhotoSensor();
 }
@@ -71,7 +76,7 @@ void readPhotoSensor()
 	}
 	*/
 	int output = resistorvalue / 5;
-	analogWrite(ledPin,output);
+	analogWrite(lcdBacklightPin,output);
 
 	/*
 	char buf[100];

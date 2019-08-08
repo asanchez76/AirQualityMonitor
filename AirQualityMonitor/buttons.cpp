@@ -13,10 +13,16 @@ volatile boolean started;
 volatile unsigned long startTime;
 volatile unsigned long endTime;
 volatile unsigned long pulseCount = 0;
+typedef void (*btn_ptr)(void);
+btn_ptr btn1_event, btn2_event, btn3_event;
 
-void initButtons()
+void initButtons(void (*btn1_ptr)(void), void (*btn2_ptr)(void), void (*btn3_ptr)(void))
 {
 	attachInterrupt (digitalPinToInterrupt (IRQ_BUTTONS_PIN), IRQbuttonPressed, CHANGE);
+	//store function pointers to be executed when the timer hits
+	btn1_event = btn1_ptr;
+	btn2_event = btn2_ptr;
+	btn3_event = btn3_ptr;
 }
 
 void IRQbuttonPressed()
@@ -39,11 +45,33 @@ void readButtonsState()
 	{
 		//pulse train ended
 		unsigned long totalMicro = endTime - startTime;
-		endTime = 0;
+
+
 
 		char buf[100];
-		sprintf(buf, "[BTN] readButtonState: %d microseconds", totalMicro);
+		sprintf(buf, "[BTN] readButtonState: %d pulseCount", pulseCount);
 		Serial.write(buf);
+
+
+
+		if (totalMicro > 250 && totalMicro < 350)
+		{
+
+			btn1_event();
+		}
+		if (totalMicro > 500 && totalMicro < 650)
+		{
+
+			btn2_event();
+		}
+		if (totalMicro > 800 && totalMicro < 950)
+		{
+
+			btn3_event();
+		}
+
+		endTime = 0;pulseCount=0;
+
 	}
 
 }

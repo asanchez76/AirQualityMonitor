@@ -14,20 +14,31 @@
 
 Timer timer;
 
+void button1_pressed()
+{
+	Serial.print("Button 1 pressed");
+}
+void button2_pressed()
+{
+	Serial.print("Button 2 pressed");
+}
+void button3_pressed()
+{
+	Serial.print("Button 3 pressed");
+}
 
 void setup() {
   Serial.begin(115200);
   int photoSensorEvent = timer.every(500, readPhotoSensor);
-  initButtons();
-  int buttonTimerEvent = timer.every(500, readButtonsState);
+ //TODO:fix
+  initButtons(button1_pressed, button2_pressed, button3_pressed);
+  int buttonTimerEvent = timer.every(100, readButtonsState);
 
   LCDInit();
   LCDPrint("Initializing...");
   delay(3000);
 
-
-  //Agustins: TODO disconnected until sensor restablished
-  //SetupESP();
+  SetupESP();
 
   int dhtsensordelay = SetupDHT();
 
@@ -35,16 +46,17 @@ void setup() {
   //initialize timed events, functions are fired every x seconds using the timer/event library
   int DHTreadingEvent = timer.every(5000, performDHTSensorReading);
 
-  //Agustins: TODO disconnected until sensor restablished
-  //int writingEvent = timer.every(60000, writeIoTFields);
-  //int connectionEvent = timer.every(10000, connectToNetwork);
-  //connectToNetwork(); //need to call it once here and then refreshed via the timer call to this same function
+  int writingEvent = timer.every(120000, writeIoTFields);
+  int connectionEvent = timer.every(10000, connectToNetwork);
+  connectToNetwork(); //need to call it once here and then refreshed via the timer call to this same function
 
   SetupAQISensor();
-  int aqiTimerid = timer.every(AQI_REFRESH, performAQISensorReading); //only after sensor is initialized
+  int aqiTimerid = timer.every(60000, performAQISensorReading); //only after sensor is initialized
 }
 
 void loop() {
   timer.update();
 }
+
+
 

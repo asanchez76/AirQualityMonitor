@@ -34,9 +34,9 @@ const int lcd_pin_rs = 12, lcd_pin_en = 11, lcd_pin_d4 = 5, lcd_pin_d5 = 4, lcd_
 const int AQI_REFRESH = 300000L;
 
 const int pResistor = A0; // Photoresistor at Arduino analog pin A0
-const int ledPin = 13;       // Led pin at Arduino pin 9
+const int lcdBacklightPin = 13;       // pwm pin to send a voltage for the backlight
 
-#define IRQ_BUTTONS_PIN	18 //pin 18 only works in mega2560 or better, change to 2 or 3 to 328 processors family
+#define IRQ_BUTTONS_PIN	20 //pin 20 only works in mega2560 or better, change to 2 or 3 to 328 processors family (here are being used for the display)
 
 
 #endif /* HARDWAREPINS_H_ */
