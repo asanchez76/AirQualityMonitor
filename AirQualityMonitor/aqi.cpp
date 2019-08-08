@@ -99,8 +99,8 @@ void performAQISensorReading() {
   Serial.print(" | AQI: "); Serial.println(AQI.AQI); Serial.print(" | Message: "); Serial.println(AQI.AqiString);
   setIoTField(3,AQI.AqiPM25);
   setIoTField(4,AQI.AqiPM10);
-  setIoTField(5,AQI.AqiString);
-
+  setIoTField(5,AQI.AQI);
+  setIoTStatus(AQI.AqiString);
 
 }
 

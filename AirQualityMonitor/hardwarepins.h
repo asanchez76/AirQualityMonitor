@@ -31,7 +31,7 @@
 //LCD Pins
 const int lcd_pin_rs = 12, lcd_pin_en = 11, lcd_pin_d4 = 5, lcd_pin_d5 = 4, lcd_pin_d6 = 3, lcd_pin_d7 = 2;
 
-const int AQI_REFRESH = 300000L;
+const int AQI_REFRESH = 120000L;
 
 const int pResistor = A0; // Photoresistor at Arduino analog pin A0
 const int lcdBacklightPin = 13;       // pwm pin to send a voltage for the backlight

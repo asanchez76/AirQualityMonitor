@@ -78,9 +78,8 @@ void setIoTField(int id, float value)
 	ThingSpeak.setField(id, value);
 }
 
-void setIoTField(int id, String value)
+void setIoTStatus(String value)
 {
-	ThingSpeak.setField(id, value);
 	ThingSpeak.setStatus(value);
 }
 

@@ -20,6 +20,6 @@ void connectToNetwork();
 void setEspBaudRate(unsigned long);
 void writeIoTFields();
 void setIoTField(int, float);
-void setIoTField(int, String);
+void setIoTStatus(String);
 
 #endif
