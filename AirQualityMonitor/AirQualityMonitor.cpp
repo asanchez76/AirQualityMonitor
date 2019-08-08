@@ -33,7 +33,8 @@ void setup() {
  //TODO:fix
   initButtons(button1_pressed, button2_pressed, button3_pressed);
   int buttonTimerEvent = timer.every(100, readButtonsState);
-
+  LCDPrint("Debugging mode");
+  /*
   LCDInit();
   LCDPrint("Initializing...");
   delay(3000);
@@ -52,6 +53,7 @@ void setup() {
 
   SetupAQISensor();
   int aqiTimerid = timer.every(60000, performAQISensorReading); //only after sensor is initialized
+  */
 }
 
 void loop() {

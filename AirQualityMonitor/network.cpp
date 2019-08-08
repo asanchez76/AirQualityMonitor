@@ -48,6 +48,7 @@ void connectToNetwork()
     }
     Serial.println("\nConnected.");
     LCDPrint("Connected.",SECRET_SSID);
+    delay(1000);
     ThingSpeak.begin(client);  // Initialize ThingSpeak
   }
 }
