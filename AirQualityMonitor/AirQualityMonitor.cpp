@@ -30,18 +30,16 @@ void button3_pressed()
 void setup() {
   Serial.begin(115200);
   int photoSensorEvent = timer.every(500, readPhotoSensor);
- //TODO:fix
   initButtons(button1_pressed, button2_pressed, button3_pressed);
   int buttonTimerEvent = timer.every(100, readButtonsState);
-  LCDPrint("Debugging mode");
-  /*
+
   LCDInit();
   LCDPrint("Initializing...");
   delay(3000);
 
-  SetupESP();
+  InitNetwork();
 
-  int dhtsensordelay = SetupDHT();
+  int dhtsensordelay = InitDHTSensor();
 
 
   //initialize timed events, functions are fired every x seconds using the timer/event library
@@ -51,13 +49,14 @@ void setup() {
   int connectionEvent = timer.every(10000, connectToNetwork);
   connectToNetwork(); //need to call it once here and then refreshed via the timer call to this same function
 
-  SetupAQISensor();
-  int aqiTimerid = timer.every(60000, performAQISensorReading); //only after sensor is initialized
-  */
+  InitAQISensor();
+  int aqiTimerid = timer.every(AQI_REFRESH, performAQISensorReading); //only after sensor is initialized
+
 }
 
 void loop() {
-  timer.update();
+	refreshAQISensor();
+	timer.update();
 }
 
 

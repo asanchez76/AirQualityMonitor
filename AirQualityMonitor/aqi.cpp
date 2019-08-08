@@ -5,10 +5,34 @@
 #include "display.h"
 #include "network.h"
 
+struct structAQI{
+  //recorder variables
+  unsigned long   durationPM10;
+  unsigned long   lowpulseoccupancyPM10 = 0;
+  unsigned long   durationPM25;
+  unsigned long   lowpulseoccupancyPM25 = 0;
+  unsigned long   starttime;
+  unsigned long   endtime;
+  // Sensor AQI data
+  float         concentrationPM25 = 0;
+  float         concentrationPM10  = 0;
+  int           AqiPM10            = -1;
+  int           AqiPM25            = -1;
+  // Indicateurs AQI - AQI display
+  int           AQI                = 0;
+  String        AqiString          = "";
+  int           AqiColor           = 0;
+};
 struct structAQI AQI;
 unsigned long   aqi_sampletime_ms = AQI_REFRESH;  // sample time (ms)
 
-void SetupAQISensor()
+void refreshAQISensor()
+{
+	AQI.lowpulseoccupancyPM10 += pulseIn(DUST_SENSOR_DIGITAL_PIN_PM10, LOW);
+	AQI.lowpulseoccupancyPM25 += pulseIn(DUST_SENSOR_DIGITAL_PIN_PM25, LOW);
+}
+
+void InitAQISensor()
 {
 	pinMode(DUST_SENSOR_DIGITAL_PIN_PM10,INPUT);
 	pinMode(DUST_SENSOR_DIGITAL_PIN_PM25,INPUT);
@@ -76,6 +100,7 @@ void performAQISensorReading() {
   setIoTField(3,AQI.AqiPM25);
   setIoTField(4,AQI.AqiPM10);
   setIoTField(5,AQI.AqiString);
+
 
 }
 

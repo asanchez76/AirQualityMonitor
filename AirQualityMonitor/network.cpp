@@ -16,7 +16,7 @@ WiFiEspClient  client;
 unsigned long myChannelNumber = SECRET_CH_ID;
 const char * myWriteAPIKey = SECRET_WRITE_APIKEY;
 
-void SetupESP()
+void InitNetwork()
 {
   // initialize serial for ESP module
   setEspBaudRate(ESP_BAUDRATE);
@@ -81,6 +81,7 @@ void setIoTField(int id, float value)
 void setIoTField(int id, String value)
 {
 	ThingSpeak.setField(id, value);
+	ThingSpeak.setStatus(value);
 }
 
 void writeIoTFields()

@@ -15,7 +15,7 @@ SoftwareSerial Serial1(6, 7); // RX, TX
 #define ESP_BAUDRATE  115200
 #endif
 
-void SetupESP();
+void InitNetwork();
 void connectToNetwork();
 void setEspBaudRate(unsigned long);
 void writeIoTFields();

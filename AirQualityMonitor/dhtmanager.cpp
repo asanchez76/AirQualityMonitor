@@ -8,7 +8,7 @@
 DHT_Unified dht(DHTPIN, DHTTYPE);
 
 //DHT sensor code goes here
-int SetupDHT()
+int InitDHTSensor()
 {
   // Initialize the DHT device.
   Serial.println("[DHT]Initializing DHT Sensor");

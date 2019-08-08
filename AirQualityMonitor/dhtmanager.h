@@ -5,7 +5,7 @@
 #include <DHT.h>
 #include <DHT_U.h>
 
-int SetupDHT();
+int InitDHTSensor();
 void performDHTSensorReading();
 
 #endif
