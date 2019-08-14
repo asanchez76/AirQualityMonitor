@@ -17,14 +17,26 @@ Timer timer;
 void button1_pressed()
 {
 	Serial.print("Button 1 pressed");
+	//shift display mode LEFT
+	if (GetDisplayMode() == AIR_QUALITY || GetDisplayMode() == TEMP_PRESSURE)
+	{
+		SwitchDisplayRegularData();
+	}
 }
+
 void button2_pressed()
 {
 	Serial.print("Button 2 pressed");
 }
+
 void button3_pressed()
 {
 	Serial.print("Button 3 pressed");
+	//shift display mode RIGHT
+	if (GetDisplayMode() == AIR_QUALITY || GetDisplayMode() == TEMP_PRESSURE)
+	{
+		SwitchDisplayRegularData();
+	}
 }
 
 void setup() {
@@ -50,6 +62,8 @@ void setup() {
   connectToNetwork(); //need to call it once here and then refreshed via the timer call to this same function
 
   InitAQISensor();
+  refreshAQISensor();
+  performAQISensorReading();
   int aqiTimerid = timer.every(AQI_REFRESH, performAQISensorReading); //only after sensor is initialized
 
 }

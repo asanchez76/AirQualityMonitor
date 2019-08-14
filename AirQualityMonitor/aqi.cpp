@@ -44,7 +44,7 @@ void InitAQISensor()
 	{
 		snprintf(charBuf, 10, "Wait %d", i);
 		Serial.print(".");
-		LCDPrint("",charBuf);
+		LCDPrint("",charBuf, true, PRIORITY);
 		delay(1000); // 1s
 	}
 
@@ -101,6 +101,11 @@ void performAQISensorReading() {
   setIoTField(4,AQI.AqiPM10);
   setIoTField(5,AQI.AQI);
   setIoTStatus(AQI.AqiString);
+
+  char line1Buf[17], line2Buf[17];
+  snprintf(line1Buf, 17, "PM25:%d PM10:%d", AQI.AqiPM25, AQI.AqiPM10);
+  snprintf(line2Buf, 17, "Cond:%s",AQI.AqiString);
+  LCDPrint(line1Buf,line2Buf,false, AIR_QUALITY);
 
 }
 

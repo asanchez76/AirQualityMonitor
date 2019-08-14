@@ -53,7 +53,7 @@ void performDHTSensorReading()
     snprintf(humstrBuf, 17, "Humidity: %i%%",(int)event.relative_humidity);
     //LCDPrint("",humstrBuf,false);
   }
-  LCDPrint(tempstrBuf,humstrBuf,0);
+  LCDPrint(tempstrBuf,humstrBuf,false, TEMP_PRESSURE);
 
 
 }
