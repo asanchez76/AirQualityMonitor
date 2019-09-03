@@ -7,7 +7,6 @@
 
 #ifndef DISPLAY_H_
 #define DISPLAY_H_
-#include "hardwarepins.h"
 #include <LiquidCrystal.h>
 
 typedef enum

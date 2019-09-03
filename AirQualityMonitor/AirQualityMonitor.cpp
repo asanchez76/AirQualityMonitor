@@ -9,8 +9,9 @@
 #include "display.h"
 #include "buttons.h"
 
+
 #include <Timer.h>
-#include <Event.h>
+//#include <Event.h>
 
 Timer timer;
 
@@ -41,6 +42,7 @@ void button3_pressed()
 
 void setup() {
   Serial.begin(115200);
+  Serial1.begin(115200);
   int photoSensorEvent = timer.every(500, readPhotoSensor);
   initButtons(button1_pressed, button2_pressed, button3_pressed);
   int buttonTimerEvent = timer.every(100, readButtonsState);

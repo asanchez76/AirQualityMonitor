@@ -4,7 +4,6 @@
 #include "secrets.h"
 #include "display.h"
 
-
 #include <ThingSpeak.h>
 
 // Wifi Settings - Update secrets.h with correct values
