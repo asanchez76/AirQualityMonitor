@@ -3,7 +3,7 @@
 #include "network.h"
 #include "secrets.h"
 #include "display.h"
-
+#include "hardwarepins.h"
 #include <ThingSpeak.h>
 
 // Wifi Settings - Update secrets.h with correct values
@@ -19,18 +19,23 @@ void InitNetwork()
 {
   // initialize serial for ESP module
   setEspBaudRate(ESP_BAUDRATE);
-
+#ifdef DEBUG
   Serial.print("[NET]Searching for ESP8266...");
+#endif
   // initialize ESP module
   WiFi.init(&Serial1);
 
   // check for the presence of the shield
   if (WiFi.status() == WL_NO_SHIELD) {
+#ifdef DEBUG
     Serial.println("[NET]WiFi shield not present");
+#endif
     // don't continue
     while (true);
   }
+#ifdef DEBUG
   Serial.println("[NET]found it!");
+#endif
 }
 
 void connectToNetwork()
@@ -38,14 +43,20 @@ void connectToNetwork()
   // Connect or reconnect to WiFi
   if(WiFi.status() != WL_CONNECTED){
     LCDPrint("Connecting",SECRET_SSID);
+#ifdef DEBUG
     Serial.print("[NET]Attempting to connect to SSID: ");
     Serial.println(SECRET_SSID);
+#endif
     while(WiFi.status() != WL_CONNECTED){
       WiFi.begin(ssid, pass);  // Connect to WPA/WPA2 network. Change this line if using open or WEP network
+#ifdef DEBUG
       Serial.print(".");
+#endif
       delay(5000);
     }
+#ifdef DEBUG
     Serial.println("\nConnected.");
+#endif
     LCDPrint("Connected.",SECRET_SSID);
     delay(1000);
     ThingSpeak.begin(client);  // Initialize ThingSpeak
@@ -56,10 +67,11 @@ void connectToNetwork()
 // can use 115200, otherwise software serial is limited to 19200.
 void setEspBaudRate(unsigned long baudrate){
   long rates[6] = {115200,74880,57600,38400,19200,9600};
-
+#ifdef DEBUG
   Serial.print("[NET]Setting ESP8266 baudrate to ");
   Serial.print(baudrate);
   Serial.println("...");
+#endif
 
   for(int i = 0; i < 6; i++){
     Serial1.begin(rates[i]);
@@ -89,10 +101,14 @@ void writeIoTFields()
 	// write to the ThingSpeak channel
 	int x = ThingSpeak.writeFields(myChannelNumber, myWriteAPIKey);
 	if(x == 200){
+#ifdef DEBUG
 	Serial.println("[NET]Channel update successful.");
+#endif
 	}
 		else{
+#ifdef DEBUG
 			Serial.println("[NET]Problem updating channel. HTTP error code " + String(x));
+#endif
 	}
 	LCDClear();
 }

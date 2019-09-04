@@ -11,9 +11,13 @@ DHT_Unified dht(DHTPIN, DHTTYPE);
 int InitDHTSensor()
 {
   // Initialize the DHT device.
+#ifdef DEBUG
   Serial.println("[DHT]Initializing DHT Sensor");
+#endif
   dht.begin();
+#ifdef DEBUG
   Serial.println("[DHT]Sensor detected");
+#endif
   sensor_t sensor;
   dht.temperature().getSensor(&sensor);
   // return the delay between sensor readings based on sensor details.
@@ -22,7 +26,6 @@ int InitDHTSensor()
 
 void performDHTSensorReading()
 {
-  //Serial.println("[DHT]DHT Sensor reading triggered");
   // Delay between measurements.
   //delay(delayMS);
   // Get temperature event and print its value.
@@ -32,12 +35,15 @@ void performDHTSensorReading()
   char tempstrBuf[17];
   char humstrBuf[17];
   if (isnan(event.temperature)) {
+#ifdef DEBUG
     Serial.println("[DHT]Temp sensor reading error");
+#endif
   }
   else {
     char charBuf[4];
     dtostrf(event.temperature, sizeof(charBuf), 1, charBuf);
     setIoTField(1, event.temperature);
+    //TODO: this takes around 300 bytes. Replace for something smaller
     fmtDouble(event.temperature, 1, charBuf);
     snprintf(tempstrBuf, 17, "Room Temp: %sC", charBuf);
     //LCDPrint(tempstrBuf,"",false);
@@ -45,7 +51,9 @@ void performDHTSensorReading()
   // Get humidity event and print its value.
   dht.humidity().getEvent(&event);
   if (isnan(event.relative_humidity)) {
+#ifdef DEBUG
     Serial.println("[DHT]Humidity sensor reading error");
+#endif
   }
   else {
 	char charBuf[4];

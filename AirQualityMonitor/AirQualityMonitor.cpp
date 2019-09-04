@@ -10,14 +10,16 @@
 #include "buttons.h"
 
 
-#include <Timer.h>
+#include "Timer.h"
 //#include <Event.h>
 
 Timer timer;
 
 void button1_pressed()
 {
+#ifdef DEBUG
 	Serial.print("Button 1 pressed");
+#endif
 	//shift display mode LEFT
 	if (GetDisplayMode() == AIR_QUALITY || GetDisplayMode() == TEMP_PRESSURE)
 	{
@@ -27,12 +29,16 @@ void button1_pressed()
 
 void button2_pressed()
 {
+#ifdef DEBUG
 	Serial.print("Button 2 pressed");
+#endif
 }
 
 void button3_pressed()
 {
+#ifdef DEBUG
 	Serial.print("Button 3 pressed");
+#endif
 	//shift display mode RIGHT
 	if (GetDisplayMode() == AIR_QUALITY || GetDisplayMode() == TEMP_PRESSURE)
 	{
@@ -43,9 +49,9 @@ void button3_pressed()
 void setup() {
   Serial.begin(115200);
   Serial1.begin(115200);
-  int photoSensorEvent = timer.every(500, readPhotoSensor);
+  timer.every(500, readPhotoSensor);
   initButtons(button1_pressed, button2_pressed, button3_pressed);
-  int buttonTimerEvent = timer.every(100, readButtonsState);
+  timer.every(100, readButtonsState);
 
   LCDInit();
   LCDPrint("Initializing...");
@@ -53,20 +59,20 @@ void setup() {
 
   InitNetwork();
 
-  int dhtsensordelay = InitDHTSensor();
+  InitDHTSensor();
 
 
   //initialize timed events, functions are fired every x seconds using the timer/event library
-  int DHTreadingEvent = timer.every(5000, performDHTSensorReading);
+  timer.every(5000, performDHTSensorReading);
 
-  int writingEvent = timer.every(120000, writeIoTFields);
-  int connectionEvent = timer.every(10000, connectToNetwork);
+  timer.every(120000, writeIoTFields);
+  timer.every(10000, connectToNetwork);
   connectToNetwork(); //need to call it once here and then refreshed via the timer call to this same function
 
   InitAQISensor();
   refreshAQISensor();
   performAQISensorReading();
-  int aqiTimerid = timer.every(AQI_REFRESH, performAQISensorReading); //only after sensor is initialized
+  timer.every(AQI_REFRESH, performAQISensorReading); //only after sensor is initialized
 
 }
 

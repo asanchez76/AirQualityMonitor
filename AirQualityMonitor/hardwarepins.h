@@ -38,5 +38,8 @@ const int lcdBacklightPin = 13;       // pwm pin to send a voltage for the backl
 
 #define IRQ_BUTTONS_PIN	20 //pin 20 only works in mega2560 or better, change to 2 or 3 to 328 processors family (here are being used for the display)
 
+#define Serial1 Serial //TODO: remove this, just for testing code on Uno board
+//define DEBUG for serial debugging, otherwise NODEBUG
+#define NODEBUG
 
 #endif /* HARDWAREPINS_H_ */

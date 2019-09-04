@@ -1,2 +1,2 @@
 eclipse.preferences.version=1
-libraries=["WiFiEsp","DHT sensor library","arduino-timer","Adafruit Unified Sensor","ThingSpeak","LiquidCrystal"]
+libraries=["WiFiEsp","DHT sensor library","Adafruit Unified Sensor","ThingSpeak","LiquidCrystal"]

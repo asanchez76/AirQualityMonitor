@@ -34,7 +34,6 @@ void IRQbuttonPressed()
 	//The IRQ line receives a square signal, need to calculate a frequency to determine which button was pressed
 	//this function is called every time the pulse raises or falls, the oscillator may have slight variations in frequencies, so use ranges.
 
-	//Serial.print("IRQbuttonPressed()");
 	if (!ignore_IRQ)
 	{
 		if (started)

@@ -37,18 +37,23 @@ void InitAQISensor()
 	pinMode(DUST_SENSOR_DIGITAL_PIN_PM10,INPUT);
 	pinMode(DUST_SENSOR_DIGITAL_PIN_PM25,INPUT);
 	// wait 60s for DSM501 to warm up
+#ifdef DEBUG
 	Serial.println("[AQI]Please wait 10s for DSM501 to warm up");
+#endif
 	LCDPrint("Sensor warmup:");
 	char charBuf[10];
 	for (int i = 10; i >= 1; i--)
 	{
 		snprintf(charBuf, 10, "Wait %d", i);
+#ifdef DEBUG
 		Serial.print(".");
+#endif
 		LCDPrint("",charBuf, true, PRIORITY);
 		delay(1000); // 1s
 	}
-
+#ifdef DEBUG
 	Serial.println("[AQI]Ready!");
+#endif
 	AQI.starttime = millis();
 }
 
@@ -57,7 +62,9 @@ void updateAQILevel(){
 }
 
 void performAQISensorReading() {
+#ifdef DEBUG
   Serial.println("performAQISensorReading function called");
+#endif
   //update measurements
   AQI.endtime = millis();
   float ratio = AQI.lowpulseoccupancyPM10 / (aqi_sampletime_ms * 10.0);
@@ -71,9 +78,9 @@ void performAQISensorReading() {
   if ( aqi_sampletime_ms < 3600000 ) { concentration = concentration * ( aqi_sampletime_ms / 3600000.0 ); }
   AQI.lowpulseoccupancyPM25 = 0;
   AQI.concentrationPM25 = concentration;
-
+#ifdef DEBUG
   Serial.print("[AQI]Concentrations => PM2.5: "); Serial.print(AQI.concentrationPM25); Serial.print(" | PM10: "); Serial.println(AQI.concentrationPM10);
-
+#endif
   AQI.starttime = millis();
 
   //update AQI for each sensor
@@ -94,9 +101,10 @@ void performAQISensorReading() {
   //update AQI index
   updateAQILevel();
   updateAQIDisplay();
-
+#ifdef DEBUG
   Serial.print("[AQI]AQIs => PM25: "); Serial.print(AQI.AqiPM25); Serial.print(" | PM10: "); Serial.println(AQI.AqiPM10);
   Serial.print(" | AQI: "); Serial.println(AQI.AQI); Serial.print(" | Message: "); Serial.println(AQI.AqiString);
+#endif
   setIoTField(3,AQI.AqiPM25);
   setIoTField(4,AQI.AqiPM10);
   setIoTField(5,AQI.AQI);
